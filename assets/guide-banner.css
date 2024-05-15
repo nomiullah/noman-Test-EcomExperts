@@ -1,0 +1,302 @@
+.gift-guide-banner {
+	position: relative;
+	background-color: #ffffff;
+	font-family: "Jost", sans-serif;
+	box-sizing: border-box;
+}
+
+/* Top Header style */
+.guide-header {
+	padding: 10px 0;
+	background-color: #F5F5F5;
+	position: relative;
+}
+
+.header-innner {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 10px
+}
+
+
+/* Logo */
+.guide-header-logo {
+	line-height: 0;
+}
+
+.guide-header-logo a {
+	display: inline-block;
+	line-height: 1;
+}
+
+.guide-header-right {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	text-align: center;
+	gap: 10px;
+	width: 100%;
+}
+
+.guide-header-right .guide-cta {
+	margin-left: auto;
+}
+
+.guide-header .banner-top-text {
+	font-size: 16px;
+	color: #000;
+	line-height: 1;
+	font-weight: 400;
+	text-align: center;
+	font-family: "Jost", sans-serif;	
+	width: 100%;
+	border-radius: 7px;
+}
+
+/* Burger Menu */
+.guide-burger-menu {
+	background-color: transparent;
+	cursor: pointer;
+	width: 24px;
+	height: 16px;
+	flex: 0 0 24px;
+	position: relative;
+	display: none;
+}
+.guide-burger-menu span {
+	display: block;
+	position: absolute;
+	background-color: #000000;
+	height: 2px;
+	width: 100%;
+	-webkit-transition: all ease 0.4s;
+	-moz-transition: all ease 0.4s;
+	-ms-transition: all ease 0.4s;
+	-o-transition: all ease 0.4s;
+	transition: all ease 0.4s;
+}
+.guide-burger-menu span:nth-child(1) {
+	top: 0;
+}
+.guide-burger-menu span:nth-child(2) {
+	top: 50%;
+	-webkit-transform: translateY(-50%);
+	-moz-transform: translateY(-50%);
+	-ms-transform: translateY(-50%);
+	-o-transform: translateY(-50%);
+	transform: translateY(-50%);
+}
+.guide-burger-menu span:nth-child(3) {
+	bottom: 0;
+}
+.guide-burger-menu.active span:nth-child(1) {
+	-webkit-transform: translateY(6px) rotate(45deg);
+	-moz-transform: translateY(6px) rotate(45deg);
+	-ms-transform: translateY(6px) rotate(45deg);
+	-o-transform: translateY(6px) rotate(45deg);
+	transform: translateY(6px) rotate(45deg);
+}
+.guide-burger-menu.active span:nth-child(2) {
+	opacity: 0;
+}
+.guide-burger-menu.active span:nth-child(3) {
+	-webkit-transform: translateY(-8px) rotate(-45deg);
+	-moz-transform: translateY(-8px) rotate(-45deg);
+	-ms-transform: translateY(-8px) rotate(-45deg);
+	-o-transform: translateY(-8px) rotate(-45deg);
+	transform: translateY(-8px) rotate(-45deg);
+}
+
+
+/* Guide Banner Style */
+.guide-banner {
+	background-color: #ffffff;
+	font-size: 0;
+	position: relative;	
+}
+.guide-banner .banner-inner {
+	display: flex;
+	align-items: center;
+}
+.guide-banner .banner-img {
+	max-height: 420px;
+	width: 100%;
+	overflow: hidden;
+}
+.guide-banner .guide-banner-img {
+	width: 100%;
+}
+.guide-banner .guide-banner-img img {
+	width: 100%;
+	object-fit: cover;
+}
+.guide-banner .guide-banner-text {
+	max-width: 560px;
+	padding: 30px 20px 30px 0;
+}
+.guide-banner h1 {
+	font-size: 70px;
+	color: #000000;
+	line-height: 1;
+	font-weight: 500;
+	margin: 0 0 30px 0;
+	font-family: "Jost", sans-serif;
+}
+.guide-banner p {
+	font-size: 20px;
+	color: #000000;
+	line-height: 1.4;
+	font-weight: 400;
+	margin: 0 0 30px 0;
+	font-family: "Jost", sans-serif;
+}
+
+
+/* Banner Bottom text */
+.banner-text-btm {
+	background-color: #F5F5F5;
+	padding: 10px 15px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	text-align: center;
+}
+.banner-text-btm span {
+	font-size: 16px;
+	line-height: 1.2;
+	color: #000000;
+	font-weight: 400;
+	display: block;
+	text-transform: uppercase;
+}
+
+
+/* Responsive style */
+@media screen and (max-width: 1199px){
+	.guide-banner h1 {
+		font-size: 60px;
+		margin: 0 0  22px 0;
+	}	
+	.guide-banner p {
+		font-size: 18px;
+	}
+	.guide-banner .guide-banner-text {
+		max-width: 500px;
+	}
+}
+
+@media screen and (max-width: 991px){
+	.guide-banner .guide-banner-text {
+		justify-content: center;
+	}
+	.guide-header {
+		box-shadow: 0 2px 4px 0 #00000026;
+		padding: 20px 0;
+		z-index: 2;
+		position: relative;
+	}
+	.guide-header .header__icon {
+		position: absolute;
+		right: 15px;
+		top: 50%;
+		transform: translateY(-50%);
+	}
+	.guide-header .guide-container {
+		display: flex;
+		justify-content: center;
+	}
+	#guide-mobile-nav {
+		position: absolute;
+		width: 100%;
+		left: 0;
+		text-align: center;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		background-color: #F2F2F2;
+		padding: 25px 20px;
+		gap: 15px;
+		top: 90%;
+		opacity: 0;
+		visibility: hidden;
+		z-index: -1;
+		-webkit-transition: all ease 0.4s;
+		-moz-transition: all ease 0.4s;
+		-ms-transition: all ease 0.4s;
+		-o-transition: all ease 0.4s;
+		transition: all ease 0.4s;
+	}
+	.guide-burger-menu {
+		display: block;
+		position: absolute;
+		left: 15px;
+		top: 50%;
+		-webkit-transform: translateY(-50%);
+		-moz-transform: translateY(-50%);
+		-ms-transform: translateY(-50%);
+		-o-transform: translateY(-50%);
+		transform: translateY(-50%);
+	}
+	#guide-mobile-nav.active {		
+		z-index: 2;
+		top: 100%;
+		visibility: visible;
+		top: calc(100% + 3px);
+		opacity: 1;
+	}
+	.guide-header-right .guide-cta {
+		margin-left: auto;
+		margin-right: auto;
+	}
+
+	.guide-banner .guide-container {
+		padding-left: 0;
+		padding-right: 0;
+	}
+	.guide-banner .banner-inner {
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		text-align: center;
+	}
+	.guide-banner .guide-banner-text {
+		max-width: 342px;
+		padding: 50px 15px 12px;		
+	}
+	.guide-banner h1 {
+		font-size: 30px;
+	}
+	.guide-banner p {
+		font-size: 16px;
+		margin-bottom: 0;
+	}
+	.guide-banner .guide-cta {
+		position: absolute;
+		bottom: 90px;
+		left: 50%;
+		-webkit-transform: translateX(-50%);
+		-moz-transform: translateX(-50%);
+		-ms-transform: translateX(-50%);
+		-o-transform: translateX(-50%);
+		transform: translateX(-50%);
+	}
+	.banner-text-btm span {
+		font-size: 14px;
+	}
+	.guide-banner-img {
+		min-height: 264px;
+	}
+}
+
+@media screen and (max-width: 420px){
+	.guide-banner .guide-cta {
+		bottom: 74px;
+	}
+}
+
+@media screen and (max-width: 375px){
+	.banner-text-btm span {
+		font-size: 12px;
+	}
+}

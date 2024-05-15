@@ -1,0 +1,50 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "padding_top": 28,
+        "padding_bottom": 28
+      }
+    },
+    "gift_guide_banner_PjjKDT": {
+      "type": "gift-guide-banner",
+      "settings": {
+        "banner_logo": "shopify:\/\/shop_images\/Group_1000007777.svg",
+        "banner_top_text": "Find the ideal gift for your loved ones.",
+        "banner_top_button_text": "choose gift",
+        "banner_top_button_url": "#",
+        "banner_image_full": "shopify:\/\/shop_images\/Frame.png",
+        "banner_image_right": "shopify:\/\/shop_images\/Frame_1.png",
+        "banner_mobile_image": "shopify:\/\/shop_images\/Frame_2.png",
+        "banner_title": "The Gift Guide",
+        "banner_blurb": "<p>Discover Joy: Your Ultimate Holiday Gift Destination. Explore our curated selection and find the perfect gifts to delight your loved ones this holiday season.<\/p>",
+        "banner_mobile_blurb": "<p>Discover Joy: Your Ultimate Holiday Gift Destination.<\/p>",
+        "banner_button_text": "Shop Now",
+        "banner_button_url": "",
+        "banner_bottom_text": "SUSTAINABLE, ETHICALLY MADE CLOTHES IN SIZES XXS TO 6XL",
+        "banner_bottom_text_mobile": "SUSTAINABLE, ETHICALLY MADE ACTIVEWEAR"
+      }
+    },
+    "gift_guide_grid_dgcD9j": {
+      "type": "gift-guide-grid",
+      "settings": {
+        "guide_grid_title": "Tisso vison in the wild",
+        "guide_grid_product_list": [
+          "black-leather-bag",
+          "blue-silk-tuxedo",
+          "chequered-red-shirt",
+          "classic-leather-jacket",
+          "classic-varsity-top",
+          "dark-denim-top"
+        ]
+      }
+    }
+  },
+  "order": [
+    "main",
+    "gift_guide_banner_PjjKDT",
+    "gift_guide_grid_dgcD9j"
+  ]
+}

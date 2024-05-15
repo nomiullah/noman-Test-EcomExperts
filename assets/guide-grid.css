@@ -1,0 +1,444 @@
+.gift-guide-grid {
+	padding: 90px 0 30px 0;
+}
+.gift-guide-grid h3 {
+    font-size: 36px;
+	line-height: 1.2;
+	font-weight: 400;
+	margin:0 0 30px 0;
+	font-family: "Lustria", serif;
+	color: #000000;	
+}
+.gift-guide-grid .guide-product-loop {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 20px;
+}
+.gift-guide-grid .product-item-wrap {
+	max-width: calc(33.33% - 14px);
+	flex: 0 0 calc(33.33% - 14px);
+	width: 100%;
+	box-sizing: border-box;
+}
+.gift-guide-grid .product-item {
+	position: relative;
+	line-height: 0;
+	z-index: 1;
+
+}
+.gift-guide-grid .product-item img {
+	width: 100%;
+	object-fit: cover;
+}
+.gift-guide-grid .grid-popup-btn {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	z-index: 1;
+	background-color: transparent;
+	padding: 0;
+	cursor: pointer;
+	border: none;
+	-webkit-transition: all ease 0.4s;
+	-moz-transition: all ease 0.4s;
+	-ms-transition: all ease 0.4s;
+	-o-transition: all ease 0.4s;
+	transition: all ease 0.4s;
+}
+.gift-guide-grid .grid-popup-btn:hover {
+	-webkit-transform: scale(1.3);
+	-moz-transform: scale(1.3);
+	-ms-transform: scale(1.3);
+	-o-transform: scale(1.3);
+	transform: scale(1.3);
+}
+.gift-guide-grid .product-item-wrap:nth-child(1) .grid-popup-btn {
+	top: 60%;
+	left: 60%;
+}
+.gift-guide-grid .product-item-wrap:nth-child(2) .grid-popup-btn {
+	left: 85%;
+}
+.gift-guide-grid .product-item-wrap:nth-child(3) .grid-popup-btn {
+	top: 20%;
+	left: 60%;
+}
+.gift-guide-grid .product-item-wrap:nth-child(4) .grid-popup-btn {
+	top: 20%;
+	left: 75%;
+}
+.gift-guide-grid .product-item-wrap:nth-child(5) .grid-popup-btn {
+	top: 27%;
+	left: 45%;
+}
+.gift-guide-grid .product-item-wrap:nth-child(6) .grid-popup-btn {
+	top: 40%;
+	left: 75%;
+}
+
+.grid-modal {
+	position: fixed;	
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 15px;
+	overflow: auto;
+	visibility: hidden;
+	z-index: -1;
+	width: 100%;
+	height: 100vh;
+	inset: 0;	
+	opacity: 0;
+}
+.grid-modal.open {
+	z-index: 100;
+	opacity: 1;
+	visibility: visible;
+}
+.grid-modal-overlay {
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	z-index: 1;
+	background-color: rgba(0, 0, 0, 0.6);
+	display: none !important;
+}
+.grid-modal-overlay.open {
+	display: block !important;
+}
+
+.grid-modal .modal-box {
+	background-color: #ffffff;
+	padding: 35px 17px 25px 17px;
+	max-width: 312px;
+	width: 100%;
+	position: relative;
+	z-index: 2;
+	box-shadow: 0 2px 4px 0 #000000;
+	min-height: 250px;	
+	min-height: 250px;	
+}
+
+
+
+.modal-box .grid-product-det-row {
+    display: flex;
+    gap: 7px;
+    margin-bottom: 10px;
+}
+
+.modal-box .grid-product-img {
+    max-width: 44%;
+    width: 100%;
+}
+
+.modal-box .grid-product-img img {
+    width: 100%;
+    height: 140px;
+    object-fit: cover;
+}
+
+.modal-box .grid-product-info {
+    max-width: 53%;
+    width: 100%;
+    padding-top: 7px;
+}
+
+.modal-box h4 {
+    font-size: 16px;
+    font-weight: 300;
+    font-family: "Jost", sans-serif;
+    margin: 0 0 15px 0;
+	color: #000;
+}
+
+.modal-box .grid-product-info span {
+    font-size: 16px;
+    font-weight: 400;
+    font-family: "Lustria", serif;
+    display: block;
+    margin: 0 0 8px;
+	color: #000;
+}
+
+.modal-box p {
+    font-size: 14px;
+    line-height: 1.3;
+    font-weight: 300;
+    margin: 0;
+	color: #000;
+}
+
+.modal-close {
+    background-color: transparent;
+    padding: 0;
+    border: none;
+    box-shadow: none;
+    position: absolute;
+    right: 12px;
+    top: 12px;
+    cursor: pointer;
+	-webkit-transition: all ease 0.4s;
+	-moz-transition: all ease 0.4s;
+	-ms-transition: all ease 0.4s;
+	-o-transition: all ease 0.4s;
+	transition: all ease 0.4s;
+}
+.modal-close:hover {
+	-webkit-transform: scale(1.3);
+	-moz-transform: scale(1.3);
+	-ms-transform: scale(1.3);
+	-o-transform: scale(1.3);
+	transform: scale(1.3);
+}
+
+/* Style for radio button appearance */
+.radio-style {
+    display: inline-block;
+    padding: 10px 15px;
+    height: 40px;
+    margin: 0;
+    border: 1px solid #000;
+    color: #000;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 18px;
+    font-weight: 400;
+    font-family: "Jost", sans-serif;
+    line-height: 1.1;
+    background-color: transparent;
+    width: 100%;
+    box-sizing: border-box;
+    position: relative;
+}
+
+.radio-style:before {
+    content: "";
+    width: 5px;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    border-right: 1px solid #000;
+    transition: 0.35s all ease;
+    background-color: #fff;
+}
+
+#White-button + .radio-style:before {
+    background-color: #FFF;
+}
+
+#Black-button + .radio-style:before {
+    background-color: #000;
+}
+
+#Blue-button + .radio-style:before {
+    background-color: #0D499F;
+}
+
+#Red-button + .radio-style:before {
+    background-color: #B20F36;
+}
+
+#Grey-button + .radio-style:before {
+    background-color: #AFAFB7;
+
+}
+
+.grid-form-radio {
+    position: relative;
+    overflow: hidden;
+}
+
+.grid-product-colors input[type="radio"] {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    top: 0;
+    height: 100%;
+    z-index: 3;
+    opacity: 0;
+    cursor: pointer;
+    margin: 0;
+}
+
+.grid-product-colors {
+    display: flex;
+    position: relative;
+    flex-wrap: wrap;
+    z-index: 1;
+    margin-bottom: 12px;
+}
+
+.grid-product-colors > label {
+    width: 100%;
+}
+
+.grid-product-colors .grid-form-groups {
+    width: 100%;
+    max-width: 49.5%;
+    flex: 0 0 49.5%;
+}
+
+.grid-form-groups + .grid-form-groups {
+    margin-left: -1px;
+}	
+.grid-form-groups > label,
+.grid-product-colors > label {
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1;
+    color: #333333;
+    font-family: "Jost", sans-serif;
+    margin-bottom: 6px;
+    display: block;
+}
+
+.grid-product-colors input[type="radio"]:checked + label {
+    color: #FFF !important;
+    background-color: #000;
+}
+
+#White-button + label:before {
+	background-color: #fff;
+}
+#Black-button + label:before {
+	background-color: #000;
+}
+#Blue-button + label:before {
+	background-color: #0d499F;
+}
+#Red-button + label:before {
+	background-color: #B20F36;
+}
+#Grey-button + label:before {
+	background-color: #AFAFB7;
+}
+
+.modal-box .guide-cta {
+    margin-top: 50px;
+    width: 100%;
+    max-width: 100%;
+}
+
+.grid-select-wrap {
+    position: relative;
+    border: 1px solid #000000;
+    padding: 0;
+    background-color: #fff;
+    height: 40px;
+}
+
+.grid-size-variants {
+    border: none;
+    background-color: transparent;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    -webkit-appearance: none;
+    padding: 10px 13px;
+    outline: none;
+    box-shadow: none;
+    cursor: pointer;
+    line-height: 1;
+    font-size: 16px;
+    color: #000;
+    z-index: 2;
+}
+
+.grid-arrow-down {
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 45px;
+    height: 100%;
+    border-left: 1px solid #000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1;	
+}
+
+.grid-select-wrap .grid-arrow-down .svg-in {
+	-webkit-transition: all ease 0.4s;
+	-moz-transition: all ease 0.4s;
+	-ms-transition: all ease 0.4s;
+	-o-transition: all ease 0.4s;
+	transition: all ease 0.4s;
+}
+.grid-select-wrap .grid-size-variants:focus ~ .grid-arrow-down .svg-in {
+	-webkit-transform: rotate(180deg);
+	-moz-transform: rotate(180deg);
+	-ms-transform: rotate(180deg);
+	-o-transform: rotate(180deg);
+	transform: rotate(180deg);
+}
+
+.grid-product-added {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 15px;
+    text-align: center;
+    width: 100%;
+    padding: 10px 20px;
+}
+
+
+.grid-product-added h3 {
+    font-size: 12px;
+    margin: 0;
+    display: inline-block;
+}
+
+.grid-product-added h3 strong {
+    font-size: 18px;
+}
+
+
+@media (max-width: 767px) {
+	.gift-guide-grid {
+		padding: 40px 0;
+	}
+    .gift-guide-grid h3 {
+        text-align: center;
+        font-size: 24px;
+        margin-bottom: 15px;
+    }
+
+    .gift-guide-grid .guide-product-loop {
+        gap: 6px;
+    }
+
+    .gift-guide-grid .product-item-wrap {
+        max-width: calc(50% - 3px);
+        flex: 0 0 calc((50% - 3px));
+    }
+
+    .grid-popup-btn {
+        top: 10% !important;
+        left: 56% !important;
+    }
+
+    .modal-box h4 {
+        margin-bottom: 7px;
+    }
+
+    .modal-box .grid-product-info span {
+        line-height: 1;
+    }
+
+    .grid-site-btn {
+        margin-top: 30px;
+    }
+}

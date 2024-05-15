@@ -1,0 +1,133 @@
+/* Jost Font external CDN */
+@import url("https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100..900;1,100..900&family=Lustria&display=swap");
+
+/* Code to Hide dfault header footer only for this template */
+html body .shopify-section.section-header,
+html body .shopify-section.shopify-section-group-footer-group,
+html body .shopify-section.announcement-bar-section {
+	display: none;
+}
+
+/* CTA */
+html .guide-cta {
+	font-size: 16px;
+	line-height: 1.3px;
+	color: #000;
+	text-align: center;
+	font-weight: 400;
+	max-width: 260px;
+	min-width: 210px;
+	border: none;
+	box-shadow: none;
+	outline: none;
+	padding: 15px 30px;	
+	text-transform: uppercase;
+	display: inline-block;
+	align-items: center;
+	justify-content: center;
+	gap: 10px;
+	text-decoration: none;
+	position: relative;
+	z-index: 1;
+	cursor: pointer;
+	background-color: #cccc;
+	font-family: "Jost", sans-serif;
+	-webkit-transition: all ease 0.4s;
+	-moz-transition: all ease 0.4s;
+	-ms-transition: all ease 0.4s;
+	-o-transition: all ease 0.4s;
+	transition: all ease 0.4s;
+}
+html .guide-cta * {
+	cursor: pointer;
+}
+html .guide-cta::after {
+	content: '';
+	width: 0;
+	height: 100%;
+	top: 0;
+	left: 0;
+	z-index: -1;
+	cursor: pointer;
+	background-color: #000000;
+	opacity: 0;
+	display: inline-block;
+	position: absolute;
+	-webkit-transition: all ease 0.4s;
+	-moz-transition: all ease 0.4s;
+	-ms-transition: all ease 0.4s;
+	-o-transition: all ease 0.4s;
+	transition: all ease 0.4s;
+}
+html .guide-cta:hover {
+	color: #ffffff;
+}
+html .guide-cta:hover svg path {
+	fill: #ffffff;
+}
+html .guide-cta:hover::after {
+	width: 100%;
+	opacity: 1;
+}
+
+/* CTA Light Style */
+html .guide-cta-light {
+	background-color: #FFF544;
+	color: #000000;
+}
+html .guide-cta-light::after {
+	background-color: #000000;
+}
+html .guide-cta-light:hover {
+	color: #ffffff;
+}
+
+/* CTA Dark Style */
+html .guide-cta-dark {
+	background-color: #000000;
+	color: #ffffff;
+}
+html .guide-cta-dark::after {
+	background-color: #FFF544;
+}
+html .guide-cta-dark:hover {
+	color: #000;	
+}
+html .guide-cta-dark:hover svg path {
+	fill: #000000;
+}
+
+
+.guide-container {
+	max-width: 1370px;
+	margin-left: auto;
+	margin-right: auto;
+	padding-left: 15px;
+	padding-right: 15px;
+}
+
+
+/* Layout Settings */
+.show-on-desktop {
+	display: block !important;
+}
+
+.show-on-mobile {
+	display: none !important;
+}
+
+@media screen and (max-width: 991px){
+	.show-on-desktop {
+		display: none !important;
+	}
+	.show-on-mobile {
+		display: block !important;
+	}	
+}
+
+@media screen and (max-width: 480px){
+	html .guide-cta {
+		padding: 15px 20px;
+		min-width: 190px;
+	}	
+}

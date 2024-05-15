@@ -1,0 +1,246 @@
+{% comment %} All style for Gift guide template {% endcomment %}
+{{ 'guide-all.css' |  asset_url | stylesheet_tag }}
+
+{% comment %} Style only for Gift guide banner secton {% endcomment %}
+{{ 'guide-banner.css' |  asset_url | stylesheet_tag }}
+
+{% comment %} Guide Banner Section {% endcomment %}
+<section class="gift-guide-banner">
+	<div class="guide-header">
+		<div class="guide-container">
+			
+			<div class="header-innner">
+				{% comment %} Mobile Burger Menu {% endcomment %}
+				<div class="guide-burger-menu" id="guide-burgermenu">
+					<span></span>
+					<span></span>
+					<span></span>
+				</div>
+
+
+				{% comment %} Header Logo {% endcomment %}
+				<div class="guide-header-logo">
+					{% if section.settings.banner_logo != blank %}
+					<a href="/"><img src="{{ section.settings.banner_logo | image_url }}" alt="Gift Guide Logo"></a>
+					{% endif  %}
+				</div>
+
+				{% comment %} Header right {% endcomment %}
+				<div class="guide-header-right" id="guide-mobile-nav">
+				
+					{% if section.settings.banner_top_text != blank %}
+						<span class="banner-top-text">{{ section.settings.banner_top_text }}</span>
+					{% endif  %}
+
+					{% if section.settings.banner_top_button_url != blank%}
+						<a class="guide-cta guide-cta-light" herf="{{ section.settings.banner_top_button_url }}">
+							{{ section.settings.banner_top_button_text }}
+							<svg width="27" height="12" viewBox="0 0 27 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+								<path d="M1 5.25C0.585786 5.25 0.25 5.58579 0.25 6C0.25 6.41421 0.585786 6.75 1 6.75L1 5.25ZM26.5303 6.53033C26.8232 6.23743 26.8232 5.76256 26.5303 5.46967L21.7574 0.696697C21.4645 0.403804 20.9896 0.403804 20.6967 0.696697C20.4038 0.989591 20.4038 1.46446 20.6967 1.75736L24.9393 6L20.6967 10.2426C20.4038 10.5355 20.4038 11.0104 20.6967 11.3033C20.9896 11.5962 21.4645 11.5962 21.7574 11.3033L26.5303 6.53033ZM1 6.75L26 6.75L26 5.25L1 5.25L1 6.75Z"
+									fill="#333333"/>
+							</svg>
+						</a>
+					{% endif  %}
+
+				</div>
+				<a href="{{ routes.cart_url }}" class="header__icon header__icon--cart link focus-inset" id="cart-icon-bubble">
+					{%- liquid
+					if cart == empty
+						render 'icon-cart-empty'
+					else
+						render 'icon-cart'
+					endif
+					-%}
+					<span class="visually-hidden">{{ 'templates.cart.cart' | t }}</span>
+					{%- if cart != empty -%}
+					<div class="cart-count-bubble">
+						{%- if cart.item_count < 100 -%}
+						<span aria-hidden="true">{{ cart.item_count }}</span>
+						{%- endif -%}
+						<span class="visually-hidden">{{ 'sections.header.cart_count' | t: count: cart.item_count }}</span>
+					</div>
+					{%- endif -%}
+				</a>
+			</div>
+
+		</div>
+	</div>
+
+	<div class="guide-banner">
+		<div class="guide-container">
+			
+			{% comment %} Guide Banner Image full {% endcomment %}
+			{% if section.settings.banner_image_full != blank %}
+				<div class="banner-img show-on-desktop">
+					<img src="{{ section.settings.banner_image_full | image_url }}" alt="Gift Guide Banner">
+				</div>
+			{% endif  %}
+
+			<div class="banner-inner">
+
+				{% comment %} Guide Banner Left text {% endcomment %}
+				<div class="guide-banner-text">
+					{% if section.settings.banner_title != blank %}
+						<h1>{{ section.settings.banner_title }}</h1>          
+					{% endif %}
+
+					{% if section.settings.banner_blurb != blank %}
+					<div class="show-on-desktop">
+						<p>{{ section.settings.banner_blurb }}</p>          
+					</div>
+					{% endif %}
+
+					{% if section.settings.banner_mobile_blurb != blank %}
+					<div class="show-on-mobile">
+						<p>{{ section.settings.banner_mobile_blurb }}</p>          
+					</div>
+					{% endif %}
+
+					{% if section.settings.banner_button_url != blank %}
+						<a class="guide-cta guide-cta-dark" href="{{ section.settings.banner_button_url }}">
+							{{ section.settings.banner_button_text }}
+							<svg width="27" height="12" viewBox="0 0 27 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+								<path d="M1 5.25C0.585786 5.25 0.25 5.58579 0.25 6C0.25 6.41421 0.585786 6.75 1 6.75L1 5.25ZM26.5303 6.53033C26.8232 6.23743 26.8232 5.76256 26.5303 5.46967L21.7574 0.696697C21.4645 0.403804 20.9896 0.403804 20.6967 0.696697C20.4038 0.989591 20.4038 1.46446 20.6967 1.75736L24.9393 6L20.6967 10.2426C20.4038 10.5355 20.4038 11.0104 20.6967 11.3033C20.9896 11.5962 21.4645 11.5962 21.7574 11.3033L26.5303 6.53033ZM1 6.75L26 6.75L26 5.25L1 5.25L1 6.75Z"
+									fill="#FFF"/>
+							</svg>
+						</a>       
+					{% endif %}
+				</div>
+				
+				{% comment %} Gide Banner Image Right {% endcomment %}
+				<div class="guide-banner-img">
+					{% if section.settings.banner_image_right != blank %}
+						<div class="show-on-desktop">
+							<img src="{{ section.settings.banner_image_right | image_url }}" alt="Gift Guide Banner Large">
+						</div>
+					{% endif  %}
+
+					{% if section.settings.banner_mobile_image != blank %}
+						<div class="show-on-mobile">
+							<img src="{{ section.settings.banner_mobile_image | image_url }}" alt="Gift Guide Banner Mobile">
+						</div>
+					{% endif  %}
+				</div>
+			</div>
+
+		</div>
+
+		{% comment %} Gide Banner Bottom Text {% endcomment %}
+		<div class="banner-text-btm">
+			{% if section.settings.banner_bottom_text != blank %}
+			<div class="show-on-desktop">
+				<span>{{ section.settings.banner_bottom_text }}</span>          
+			</div>
+			{% endif %}
+
+			{% if section.settings.banner_bottom_text_mobile != blank %}
+			<div class="show-on-mobile">
+				<span>{{ section.settings.banner_bottom_text_mobile }}</span>          
+			</div>
+			{% endif %}
+		</div>
+
+	</div>
+
+</section>
+
+<script>
+// Mobile burger menu function
+function toggleMenu(){
+  var burgerMenu = document.getElementById('guide-burgermenu');
+  var navElement = document.getElementById('guide-mobile-nav');
+  burgerMenu.addEventListener('click',function(){
+    this.classList.toggle("active");
+    navElement.classList.toggle("active");
+  });
+}
+
+document.addEventListener("DOMContentLoaded", function() {
+  toggleMenu();
+});
+
+</script>
+
+{% schema %}
+  {
+    "name": "Gift Guide Banner",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "banner_logo",
+        "label": "Banner Logo"
+      },
+      {
+        "type": "text",
+        "id": "banner_top_text",
+        "label": "Banner Top Text"
+      },
+      {
+        "type": "text",
+        "id": "banner_top_button_text",
+        "label": "Banner Top Button Text"
+      },
+      {
+        "type": "url",
+        "id": "banner_top_button_url",
+        "label": "Banner Top Button URL"
+      },
+      {
+        "type": "image_picker",
+        "id": "banner_image_full",
+        "label": "Banner Image full"
+      },
+      {
+        "type": "image_picker",
+        "id": "banner_image_right",
+        "label": "Banner Image Right"
+      },
+      {
+        "type": "image_picker",
+        "id": "banner_mobile_image",
+        "label": "Banner Mobile Image"
+      },
+      {
+        "type": "text",
+        "id": "banner_title",
+        "label": "Banner Title"
+      },
+      {
+        "type": "richtext",
+        "id": "banner_blurb",
+        "label": "Banner Blurb"
+      },
+      {
+        "type": "richtext",
+        "id": "banner_mobile_blurb",
+        "label": "Banner Mobile Blurb"
+      },
+      {
+        "type": "text",
+        "id": "banner_button_text",
+        "label": "Banner Button Text"
+      },
+      {
+        "type": "url",
+        "id": "banner_button_url",
+        "label": "Banner Button URL"
+      },
+      {
+        "type": "text",
+        "id": "banner_bottom_text",
+        "label": "Banner Bottom Text",
+        "default": "Shop Now"
+      },
+      {
+        "type": "text",
+        "id": "banner_bottom_text_mobile",
+        "label": "Banner Bottom Text Mobile"
+      }
+    ],
+    "presets": [
+      {
+        "name": "Gift Guide Banner"
+      }
+    ]
+  }
+{% endschema %}
