@@ -123,7 +123,7 @@
 								<div class="grid-select-wrap">
 									<select id="grid-sizeVariants-{{ product.id }}" class="grid-size-variants" name="grid_size_variant"
 											data-product-id="{{ product.id }}">
-										<option value="Choose your size">Choose your size</option>
+										{% comment %} <option value="Choose your size">Choose your size</option> {% endcomment %}
 										{% assign unique_sizes = product.variants | map: 'option1' | uniq %}
 										{% for size in unique_sizes %}
 											<option {% if forloop.first %}selected{% endif %}

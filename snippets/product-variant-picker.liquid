@@ -48,15 +48,51 @@
           %}
         </fieldset>
       {%- elsif picker_type == 'button' -%}
-        <fieldset class="js product-form__input product-form__input--pill">
-          <legend class="form__label">{{ option.name }}</legend>
-          {% render 'product-variant-options',
-            product: product,
-            option: option,
-            block: block,
-            picker_type: picker_type
-          %}
+        <fieldset class="js product-form__input product-form__input--pill"
+          {% if option.name == 'Size' %}
+            id="fieldset-for-size"
+          {% endif %}
+          {% if option.name == 'Color' %}
+            id="fieldset-for-color"
+          {% endif %}
+        >
+            
+
+            {%- liquid
+                  assign optionNames = settings.optionName | split:","
+                  assign useColor = false 
+                  for optionColor in optionNames 
+                    if optionColor == option.name 
+                        assign useColor = true 
+                        break
+                    endif 
+                  endfor
+              -%}
+            {%- if useColor -%}
+              <legend class="form__label ">{{ option.name }}:<span id="selected-{{ option.name }}"> {{ option.selected_value }}</span></legend>
+                {% render 'color-option', product: product, option: option, block: block %}
+                {%- else -%}
+              <legend class="form__label">{{ option.name }}</legend>
+
+              {% comment %} {% if option.name == 'Size' %}
+                <select id="custom-select">
+                  {% render 'product-variant-options', product: product, option: option, block: block, picker_type: picker_type %}
+                </select>
+              {% else %}
+                {% render 'product-variant-options', product: product, option: option, block: block, picker_type: picker_type %}
+              {% endif %}               {% endcomment %}
+
+              {% render 'product-variant-options', product: product, option: option, block: block, picker_type: picker_type %}
+
+
+            {%- endif -%}
+        
+
         </fieldset>
+
+          
+        
+
       {%- else -%}
         <div class="product-form__input product-form__input--dropdown">
           <label class="form__label" for="Option-{{ section.id }}-{{ forloop.index0 }}">
@@ -71,9 +107,9 @@
                 {% render 'swatch', swatch: option.selected_value.swatch, shape: block.settings.swatch_shape %}
               </span>
             {%- endif -%}
-            <select
+            <select              
               id="Option-{{ section.id }}-{{ forloop.index0 }}"
-              class="select__select"
+              class="select__select i-am-here"
               name="options[{{ option.name | escape }}]"
               form="{{ product_form_id }}"
             >
@@ -86,7 +122,9 @@
             </select>
             {% render 'icon-caret' %}
           </div>
-        </div>
+        </div>        
+
+
       {%- endif -%}
     {%- endfor -%}
     <script type="application/json">

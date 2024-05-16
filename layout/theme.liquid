@@ -283,6 +283,335 @@
         document.documentElement.classList.add('shopify-design-mode');
       }
     </script>
+
+    {% comment %} Style and script only for Product detail page {% endcomment %}
+    {% if template contains 'product' %}
+      <style>
+        /* Dropdown style */
+        html body variant-selects {
+          display: flex;
+          flex-direction: column;
+        }
+        #my-custom-size {
+          border: 1px solid #7d7d7d;
+          padding: 15px 20px;
+          border-radius: 0;
+          font-size: 18px;
+        }
+        #fieldset-for-color {
+          order: 2;
+          margin-top: 15px;
+        }
+        html body #fieldset-for-size label,
+        html body #fieldset-for-size label::before,
+        html body #fieldset-for-size label::after,
+        html body #fieldset-for-size input[type="radio"] {
+          margin: 0;
+          padding: 0;
+          opacity: 0;
+          width: 0;
+          height: 0;
+          overflow: hidden;
+          visibility: hidden;
+          position: absolute;
+        }
+        html body .product-form__buttons.temp-disable button {
+          cursor: not-allowed;
+          opacity: 0.5;
+        }
+        html body .product-form__buttons.temp-disable {
+          position: relative;
+        }
+        html body .product-form__buttons.temp-disable::after {
+          content: '';
+          height: 100%;
+          position: absolute;
+          width: 100%;
+          z-index: 2;
+          top: 0;
+          left: 0;
+          cursor: not-allowed;
+        }
+      </style>
+      <script>
+        // Dropdown script 
+        document.addEventListener('DOMContentLoaded', function() {                  
+
+          // Get the fieldset with data-fieldset-for-size="true"
+          // const fieldset = document.querySelector('#fieldset-for-size');       
+          var fieldsetSize = document.getElementById("fieldset-for-size");   
+          
+          if (fieldsetSize) {
+              // Get the radio inputs inside the fieldsetSize
+              const radios = fieldsetSize.querySelectorAll('input[type="radio"]');
+              const prodBtnOuters = document.querySelectorAll('.product-form__buttons');
+
+              setTimeout(function(){
+                prodBtnOuters.forEach(prodBtnOuter => {
+                    prodBtnOuter.classList.add('temp-disable');
+                });
+              }, 1000);              
+              
+              // Create a select element
+              const select = document.createElement('select');
+              select.id = 'my-custom-size';
+              
+              // Loop through radio inputs and add options to select
+              radios.forEach(radio => {
+                  const option = document.createElement('option');
+                  option.value = radio.value;
+                  option.text = radio.value;
+                  select.appendChild(option);
+              });
+              
+              // Insert select after fieldsetSize
+              fieldsetSize.parentNode.appendChild(select);              
+              
+              select.addEventListener('change', function() {
+                  const selectedValue = this.value;
+                  radios.forEach(radio => {
+                      if (radio.value === selectedValue) {
+                          radio.checked = true;
+                      }
+                  });
+                  // console.log(select.value);
+
+                  if (select.value === "Unselected") {
+                    prodBtnOuters.forEach(prodBtnOuter => {
+                        prodBtnOuter.classList.add('temp-disable');
+                    });
+                  }else{
+                    prodBtnOuters.forEach(prodBtnOuter => {
+                        prodBtnOuter.classList.remove('temp-disable');
+                    });
+                  }
+              });
+                            
+              radios.forEach(radio => {
+                  radio.addEventListener('change', function() {
+                      select.value = this.value;
+                  });
+              });
+                   
+              // console.log(select.value);
+              radios.forEach(radio => {
+                 if (radio.value === "Unselected") {
+                    radio.checked = true;
+
+                    prodBtnOuters.forEach(prodBtnOuter => {
+                        prodBtnOuter.classList.add('temp-disable');
+                    });
+                  }else{
+                    prodBtnOuters.forEach(prodBtnOuter => {
+                        prodBtnOuter.classList.remove('temp-disable');
+                    });
+                  }
+              });
+              
+          }
+          
+        });
+        
+      </script>
+    {% endif  %}
+
+
+    <script>            
+    
+        // Function to for custom bundle
+        function addNewProductToCart() {
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', '/cart/add.js', true);
+            xhr.setRequestHeader('Content-Type', 'application/json');
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === XMLHttpRequest.DONE) {
+                    if (xhr.status === 200) {
+                      var data = JSON.parse(xhr.responseText);
+                      var productsInCart = data.items;
+                      var productHandleToCheck = 'dark-winter-jacket';
+                      var found = false;
+                        // Cart updated successfully
+                        // You can update the UI here if needed
+                        console.log("Product added to the cart successfully");
+                    } else {
+                        // Error adding product to cart
+                        console.error('Error adding product to cart:', xhr.status);
+                    }
+
+                    // Array to store variant IDs
+                    var variantIds = [];
+                        
+
+                    // Loop through the items in the cart to find the product handle
+                    for (var i = 0; i < productsInCart.length; i++) {
+                        var product = productsInCart[i];
+                        if (product.handle === productHandleToCheck) {
+                            // Product with handle "black-leather-bag" is in the cart
+                            var variantId = product.variant_id;
+
+                            variantIds.push(variantId); // Store the variant ID
+                        }
+                    }
+
+                    // Variant ID to check occurrences
+                    var variantToCheck = 44208130588871;
+
+                    // Use filter to create a new array containing only the occurrences of the variant ID
+                    var occurrences = variantIds.filter(function(variantId) {
+                        return variantId === variantToCheck;
+                    });
+
+                    // Get the length of the occurrences array to determine the count
+                    var countIds = occurrences.length;
+                    console.log("Jacket:", countIds);
+                    
+                }
+            };
+            xhr.onerror = function() {
+                // Error occurred during the AJAX request
+                console.error('Error adding product to cart:', xhr.status);
+            };
+            var newItem = {
+                items: [{
+                    handle: 'dark-winter-jacket', // Handle of the product
+                    id: 44208130588871, // Variant ID of the product
+                    quantity: 1, // Quantity of the product to add
+                    properties: {} // Additional properties, if any
+                }]
+            };
+            xhr.send(JSON.stringify(newItem));
+        }      
+        
+        // Function to check if "black-leather-bag" product is in the cart and alert if specific variant IDs are found
+        function checkProductInCart() {
+            var xhr = new XMLHttpRequest();
+            xhr.open('GET', '/cart.js', true);
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === XMLHttpRequest.DONE) {
+                    if (xhr.status === 200) {
+                        var data = JSON.parse(xhr.responseText);
+                        var productsInCart = data.items;
+                        var productHandleToCheck = 'black-leather-bag';
+                        var found = false; // Flag to track if the product is found
+                        
+                        // Array to store variant IDs
+                        var variantIds = [];
+                        
+
+                        // Loop through the items in the cart to find the product handle
+                        for (var i = 0; i < productsInCart.length; i++) {
+                            var product = productsInCart[i];
+                            if (product.handle === productHandleToCheck) {
+                                // Product with handle "black-leather-bag" is in the cart
+                                var variantId = product.variant_id;
+
+                                variantIds.push(variantId); // Store the variant ID
+                            }
+                        }
+
+                        // Variant ID to check occurrences
+                        var variantToCheck = 44208130293959;
+
+                        // Use filter to create a new array containing only the occurrences of the variant ID
+                        var occurrences = variantIds.filter(function(variantId) {
+                            return variantId === variantToCheck;
+                        });
+
+                        // Get the length of the occurrences array to determine the count
+                        var countIds = occurrences.length;
+                        // console.log("Bag:", countIds);
+                        if(countIds === 1){
+                          addNewProductToCart();
+                        }
+
+                        // Check if both specific variant IDs are found
+                       
+                        // var variantIds = [];
+                        /*console.log(variantIds);
+
+                        if (found) {
+                          console.log('2 variant of hand book found');                            
+                            addNewProductToCart();
+                            
+                        } else {
+                            // Either one or both variant IDs not found in the cart
+                            console.log("Either one or both of the specific variant IDs are not found");
+                        }*/
+                    } else {
+                        console.error('Error fetching cart:', xhr.status);
+                    }
+                }
+            };
+            xhr.onerror = function() {
+                console.error('Error fetching cart:', xhr.status);
+            };
+            xhr.send();
+        }        
+
+        document.addEventListener('DOMContentLoaded', function() {
+          var addToCartButtons = document.querySelectorAll('.product-form__submit, .modal-box button[type="submit"].guide-cta');
+          
+          addToCartButtons.forEach(function(button) {
+            button.addEventListener('click', function(event) {
+              setTimeout(function(){
+                checkProductInCart();
+              }, 1000);
+            });
+          });
+          
+        });
+
+        
+        // Function to remove Jecket cart product
+        document.addEventListener('DOMContentLoaded', function() {
+            var removeButtons = document.querySelectorAll('cart-remove-button a');
+
+            removeButtons.forEach(function(button) {
+
+                button.addEventListener('click', function(event) {
+                    
+                    var areaIdata = this.getAttribute('aria-label');                    
+                     
+                      if (areaIdata == 'Remove Handbag - Medium / Black') {
+                          console.log('Handbag clicked');
+                          
+                          // Function to click the remove buttons
+                          function clickRemoveButtons() {
+                              var removeElementBtns = document.querySelectorAll('#main-cart-items a[aria-label="Remove Soft Winter Jacket - M / Black"]');                              
+                              removeElementBtns.forEach(function(btn) {
+                                  btn.click();
+                              });
+                          }
+
+                          // Observer configuration
+                          var observerConfig = { childList: true, subtree: true };
+
+                          // Callback function to handle mutations
+                          var observerCallback = function(mutationsList, observer) {
+                              for(var mutation of mutationsList) {
+                                  if (mutation.type === 'childList') {
+                                      // If new nodes are added, check if the remove buttons are available and click them
+                                      clickRemoveButtons();
+                                  }
+                              }
+                          };
+
+                          // Create a new observer
+                          var observer = new MutationObserver(observerCallback);
+
+                          // Start observing changes to the main cart items container
+                          var mainCartItemsContainer = document.getElementById('main-cart-items');
+                          observer.observe(mainCartItemsContainer, observerConfig);
+                      }
+
+                });
+            });
+
+            
+        });
+
+      </script>
+
   </head>
 
   <body class="gradient{% if settings.animations_hover_elements != 'none' %} animate--hover-{{ settings.animations_hover_elements }}{% endif %}">
