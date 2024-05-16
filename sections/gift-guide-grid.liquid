@@ -1,0 +1,356 @@
+{% comment %} All style for Gift guide template {% endcomment %}
+{{ 'guide-all.css' |  asset_url | stylesheet_tag }}
+
+{% comment %} Style only for Gift guide banner secton {% endcomment %}
+{{ 'guide-grid.css' |  asset_url | stylesheet_tag }}
+
+{% comment %} Guide Banner Section {% endcomment %}
+<section class="gift-guide-grid">
+
+	<div class="guide-container">
+
+		{% comment %} Guide Grid title {% endcomment %}
+		{% if section.settings.guide_grid_title != blank %}
+			<h3>{{ section.settings.guide_grid_title }}</h3>
+		{% endif  %}
+
+		{% comment %} Guide Grid Products {% endcomment %}
+		<div class="guide-product-loop">
+		{%- assign guide_grid_product_list = section.settings.guide_grid_product_list -%}
+		{%- for product in guide_grid_product_list -%}
+			{% if product.featured_image %}
+
+				<div class="product-item-wrap">
+					<div class="product-item">
+
+					
+						<img src="{{ product.featured_image |  img_url: 'medium' }}" alt="{{ product.title }}">
+
+						<a href="#" class="grid-popup-btn" data-grid-button="{{ forloop.index }}">
+							<svg xmlns="http://www.w3.org/2000/svg" width="23" height="22" viewBox="0 0 23 22" fill="none">
+								<circle cx="11.5" cy="11" r="11" fill="#F8F8F8" fill-opacity="0.9"/>
+								<path d="M11.8457 7.04175V15.5033" stroke="black" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="round"/>
+								<path d="M7.61523 11.2725H16.0768" stroke="black" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="round"/>
+							</svg>							
+						</a>							
+
+					</div>
+				</div>
+
+			{% endif %}
+		{%- endfor -%}
+		</div>
+
+	</div>
+
+</section>
+
+{% comment %}  {% endcomment %}
+{%- for product in guide_grid_product_list -%}
+	{% if product.featured_image %}
+
+		<div class="grid-modal" data-grid-popup="{{ forloop.index }}">
+			<div class="modal-box">	
+
+					<a href="#" class="modal-close">
+						<svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+							<g filter="url(#filter0_d_5_3065)">
+							<circle cx="15" cy="12" r="11" fill="#F8F8F8" fill-opacity="0.9"/>
+							<path d="M12.3536 9.28107L18.3368 15.2643" stroke="black" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="round"/>
+							<path d="M12.3535 15.2642L18.3367 9.28095" stroke="black" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="round"/>
+							</g>
+							<defs>
+							<filter id="filter0_d_5_3065" x="0" y="0" width="30" height="30" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+							<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+							<feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+							<feOffset dy="3"/>
+							<feGaussianBlur stdDeviation="2"/>
+							<feComposite in2="hardAlpha" operator="out"/>
+							<feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.2 0"/>
+							<feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_5_3065"/>
+							<feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_5_3065" result="shape"/>
+							</filter>
+							</defs>
+						</svg>
+					</a>
+
+					
+					<div class="grid-product-added" id="grid-product-added-{{ product.id }}" style="display: none;">
+						<h3><strong>{{ product.title }}</strong> <br/> Added successfully to your cart. </h3>
+					</div>
+
+
+					<div class="grid-product-inner-wrap" id="grid-product-inner-wrap-{{ product.id }}">
+						<div class="grid-product-det-row">
+							<div class="grid-product-img">
+								<img src="{{ product.featured_image | img_url: 'medium' }}" alt="{{ product.title }}">
+							</div>
+							<div class="grid-product-info">
+								<h4>{{ product.title }}</h4>
+								{%- assign selected_variant = product.selected_or_first_available_variant -%}
+
+								{%- if selected_variant.available -%}
+									<span id="grid-variant-price-{{ product.id }}">{{ selected_variant.price | money }}</span>
+								{%- endif -%}
+								<p>{{ product.description }}</p>
+							</div>
+						</div>
+						<div class="grid-product-colors">
+							<div id="radio-bg" class="radio-bg"></div>
+							<label>Color</label>
+							{% assign unique_colors = product.variants | map: 'option2' | uniq %}
+							{% for color in unique_colors %}
+								<div class="grid-form-groups">
+									<div class="grid-form-radio">
+										<input type="radio" id="{{ color }}-button" class="grid-variant-color-selector"
+											name="colorRadio-{{ product.id }}" value="{{ color }}"
+											{% if forloop.first %}checked{% endif %}
+											data-product-id="{{ product.id }}">
+										<label for="{{ color }}-button" class="radio-style">{{ color }}</label>
+									</div>
+								</div>
+							{% endfor %}
+						</div>
+
+
+
+
+
+
+						<div class="grid-product-sizes">
+							<div class="grid-form-groups">
+								<label>Size</label>
+								<div class="grid-select-wrap">
+									<select id="grid-sizeVariants-{{ product.id }}" class="grid-size-variants" name="grid_size_variant"
+											data-product-id="{{ product.id }}">
+										{% comment %} <option value="Choose your size">Choose your size</option> {% endcomment %}
+										{% assign unique_sizes = product.variants | map: 'option1' | uniq %}
+										{% for size in unique_sizes %}
+											<option {% if forloop.first %}selected{% endif %}
+													value="{{ size }}">{{ size }}</option>
+										{% endfor %}
+									</select>
+									<div class="grid-arrow-down">
+										<svg class="svg-in" width="16" height="10" viewBox="0 0 16 10" fill="none"
+											xmlns="http://www.w3.org/2000/svg">
+											<path d="M2 2L8 8L14 2" stroke="black" stroke-width="1.5" stroke-linecap="square"/>
+										</svg>
+									</div>
+								</div>
+							</div>
+						</div>
+
+
+						<button type="submit" name="add" id="grid-addToCart-{{ section.id }}"
+								class="guide-cta guide-cta-dark {% if section.settings.enable_sticky_info %} btn--sticky{% endif %}">
+						<span id="grid-addToCartText-{{ section.id }}">
+						{{ 'products.product.add_to_cart' | t }}
+						</span>
+							<svg width="27" height="12" viewBox="0 0 27 12" fill="none"
+								xmlns="http://www.w3.org/2000/svg">
+								<path d="M1 5.25C0.585786 5.25 0.25 5.58579 0.25 6C0.25 6.41421 0.585786 6.75 1 6.75L1 5.25ZM26.5303 6.53033C26.8232 6.23743 26.8232 5.76256 26.5303 5.46967L21.7574 0.696697C21.4645 0.403804 20.9896 0.403804 20.6967 0.696697C20.4038 0.989591 20.4038 1.46446 20.6967 1.75736L24.9393 6L20.6967 10.2426C20.4038 10.5355 20.4038 11.0104 20.6967 11.3033C20.9896 11.5962 21.4645 11.5962 21.7574 11.3033L26.5303 6.53033ZM1 6.75L26 6.75L26 5.25L1 5.25L1 6.75Z"
+									fill="#FFF"/>
+							</svg>
+						</button>
+					</div>
+
+			</div>
+			<div class="grid-modal-overlay" data-grid-overlay="{{ forloop.index }}"></div>
+		</div>
+		
+	{% endif %}
+{%- endfor -%}
+
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    var addToCartButtons = document.querySelectorAll('[id^="grid-addToCart-"]');
+
+    addToCartButtons.forEach(function (button) {
+        button.addEventListener('click', function () {
+            var productModal = button.closest('.grid-modal');
+            if (!productModal) {
+                console.error("Product modal not found.");
+                return;
+            }
+            var productIndex = productModal.getAttribute('data-grid-popup');
+            var productData = JSON.parse('{{ guide_grid_product_list | json }}');
+            var product = productData[productIndex - 1];
+
+            if (product) {
+                var productId = product.id;
+                handleAddToCart(productId);
+            }
+        });
+    });
+
+    var inputColorVariants = document.querySelectorAll('.grid-variant-color-selector');
+
+    inputColorVariants.forEach(function (input) {
+        input.addEventListener('change', function (event) {
+            var productId = event.target.getAttribute('data-product-id');
+            var variant = getVariant(productId);
+            if (variant && productId) {
+                updatePrice(variant, productId);
+            }
+        });
+    });
+
+    var inputSizeVariants = document.querySelectorAll('.grid-size-variants');
+
+    inputSizeVariants.forEach(function (input) {
+        input.addEventListener('change', function (event) {
+            var productId = event.target.getAttribute('data-product-id');
+            var variant = getVariant(productId);
+            if (variant && productId) {
+                updatePrice(variant, productId);
+            }
+        });
+    });
+
+    function updatePrice(variant, productId) {
+        if (variant) {
+            var price = variant.price / 100;
+            document.getElementById('grid-variant-price-' + productId).innerHTML = '$' + price.toFixed(2);
+        }
+    }
+
+    function getVariant(productId) {
+        var allProducts = JSON.parse('{{ guide_grid_product_list | json }}');
+        var selectedProduct = allProducts.filter(product => product.id === +productId);
+        if (selectedProduct.length) {
+            var variants = selectedProduct[0].variants;
+            var selectedColor = null;
+            var colors = document.getElementsByName('colorRadio-' + productId);
+            for (var i = 0; i < colors.length; i++) {
+                if (colors[i].checked) {
+                    selectedColor = colors[i].value;
+                    break;
+                }
+            }
+            var selectedSize = document.getElementById('grid-sizeVariants-' + productId).value;
+            if (selectedColor && selectedSize) {
+                selectedColor = selectedColor.toLowerCase();
+                selectedSize = selectedSize.toLowerCase();
+                var selectedVariant = variants.filter(variant => variant.options[0].toLowerCase() === selectedSize &&
+                    variant.options[1].toLowerCase() === selectedColor);
+                if (selectedVariant.length && selectedVariant[0].available) {
+                    return selectedVariant[0];
+                }
+            }
+        }
+        return false;
+    }
+
+    function handleAddToCart(productId) {
+        var variant = getVariant(productId);
+        if (variant) {
+            addToCart(variant, productId);
+        }
+    }
+
+    function addToCart(variant, productId) {
+       
+		let postData = {
+            items: [{
+                id: variant.id
+            }]
+        };
+
+        fetch(window.Shopify.routes.root + 'cart/add.js', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(postData)
+        })
+            .then(response => {
+                return response.json();
+            })
+            .then(data => {
+                document.getElementById('grid-product-inner-wrap-' + productId).style.display = 'none';
+                document.getElementById('grid-product-added-' + productId).style.display = 'block';
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
+    }
+
+});
+
+
+
+// Grid Product popup function 2
+document.addEventListener("DOMContentLoaded", function() {
+  
+  var popupButtons = document.querySelectorAll('.grid-popup-btn');
+
+  popupButtons.forEach(function(button) {
+    button.addEventListener('click', function(event) {
+      event.preventDefault();
+      
+      // Get the index of the popup
+      var popupIndex = button.getAttribute('data-grid-button');
+      
+      var popup = document.querySelector('[data-grid-popup="' + popupIndex + '"]');
+      var popupoverlay = document.querySelector('[data-grid-overlay="' + popupIndex + '"]');
+      
+      popup.classList.add('open');
+      popupoverlay.classList.add('open');
+    });
+  });
+
+  // Close popup when clicking on modal close button
+  var modalCloseButtons = document.querySelectorAll('.modal-close, .grid-modal-overlay');
+  var modalAdded = document.querySelectorAll('.grid-product-added');
+  var modalinner = document.querySelectorAll('.grid-product-inner-wrap');
+
+  modalCloseButtons.forEach(function(button) {      
+    
+    button.addEventListener('click', function(event) {
+      event.preventDefault(); 
+      var popup = button.closest('.grid-modal');
+      var popupoverlaytoclose = button.closest('.grid-modal-overlay');
+      
+      popup.classList.remove('open');
+      popup.classList.remove('popupoverlaytoclose');
+
+      // Hide grid-product-added and show grid-product-inner-wrap
+      modalAdded.forEach(function(element) {
+          element.style.display = 'none';
+      });
+
+      modalinner.forEach(function(element) {
+          element.style.display = 'block';
+      });
+      
+    });
+
+  });
+
+});
+
+</script>
+
+{% schema %}
+  {
+    "name": "Gift Guide Grid",
+    "settings": [
+    {
+      "type": "text",
+      "id": "guide_grid_title",
+      "label": "Guide Grid Title"
+    },
+    {
+      "type": "product_list",
+      "id": "guide_grid_product_list",
+      "label": "Guide Grid Product List"
+    }
+  ],
+    "presets": [
+      {
+        "name": "Gift Guide Grid"
+      }
+    ]
+  }
+{% endschema %}
