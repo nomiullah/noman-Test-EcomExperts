@@ -13,7 +13,7 @@
       {
         "type": "paragraph",
         "content": "Support WebSensePro by [Subscribing our Channel](https:\/\/youtube.com\/@websensepro?sub_confirmation=1)"
-      },      
+      },
       {
         "type": "text",
         "id": "optionName",
@@ -67,8 +67,8 @@
             "label": "Square"
           },
           {
-            "value":"square-round-corners",
-            "label":"Square round corners"
+            "value": "square-round-corners",
+            "label": "Square round corners"
           },
           {
             "value": "portrait",
@@ -76,7 +76,7 @@
           }
         ],
         "default": "round",
-        "info":"Portrait mode is only available for the variant image type."
+        "info": "Portrait mode is only available for the variant image type."
       },
       {
         "type": "range",
