@@ -298,14 +298,15 @@
           border-radius: 0;
           font-size: 18px;
         }
-        #fieldset-for-color {
+        fieldset[data-field-type="fieldset-for-color"] {
           order: 2;
           margin-top: 15px;
         }
-        html body #fieldset-for-size label,
-        html body #fieldset-for-size label::before,
-        html body #fieldset-for-size label::after,
-        html body #fieldset-for-size input[type="radio"] {
+        html body product-info fieldset.product-form__input--pill[data-field-type="fieldset-for-size"] input[type=radio]+label,
+        html body product-info fieldset[data-field-type="fieldset-for-size"] label,
+        html body product-info fieldset[data-field-type="fieldset-for-size"] label::before,
+        html body product-info fieldset[data-field-type="fieldset-for-size"] label::after,
+        html body product-info fieldset[data-field-type="fieldset-for-size"] input[type="radio"] {
           margin: 0;
           padding: 0;
           opacity: 0;
@@ -337,9 +338,8 @@
         // Dropdown script 
         document.addEventListener('DOMContentLoaded', function() {                  
 
-          // Get the fieldset with data-fieldset-for-size="true"
-          // const fieldset = document.querySelector('#fieldset-for-size');       
-          var fieldsetSize = document.getElementById("fieldset-for-size");   
+          // Get the fieldset with data-fieldset-for-size="true"     
+          var fieldsetSize = document.querySelector('fieldset[data-field-type="fieldset-for-color"]');
           
           if (fieldsetSize) {
               // Get the radio inputs inside the fieldsetSize

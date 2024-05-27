@@ -1,20 +1,12 @@
 {
   "sections": {
-    "main": {
-      "type": "main-page",
-      "disabled": true,
-      "settings": {
-        "padding_top": 28,
-        "padding_bottom": 28
-      }
-    },
     "discounted_product_NxyYCH": {
       "type": "discounted-product",
       "blocks": {
         "text_bcBAAV": {
           "type": "text",
           "settings": {
-            "text": "Week Promo",
+            "text": "Text block",
             "text_style": "body"
           }
         },
@@ -74,7 +66,7 @@
           "type": "reviews",
           "settings": {
             "review_image": "shopify:\/\/shop_images\/young-man-in-bright-fashion_925x_b3b7ebd6-c91f-496a-a516-45403497ea25.jpg",
-            "reviews_date": "11.02.2023",
+            "reviews_date": "",
             "review_stars_": 1,
             "reviews_copy": "<p>Lorem ipsum dolor sit amet consectetur adipisicing elit.<\/p>",
             "reviewer_name": "Melissa b."
@@ -84,7 +76,7 @@
           "type": "reviews",
           "settings": {
             "review_image": "shopify:\/\/shop_images\/young-man-in-bright-fashion_925x_b3b7ebd6-c91f-496a-a516-45403497ea25.jpg",
-            "reviews_date": "11.02.2023",
+            "reviews_date": "",
             "review_stars_": 2,
             "reviews_copy": "<p>Lorem ipsum dolor sit amet consectetur adipisicing elit.<\/p>",
             "reviewer_name": "Melissa b."
@@ -94,7 +86,7 @@
           "type": "reviews",
           "settings": {
             "review_image": "shopify:\/\/shop_images\/young-man-in-bright-fashion_925x_b3b7ebd6-c91f-496a-a516-45403497ea25.jpg",
-            "reviews_date": "11.04.2023",
+            "reviews_date": "",
             "review_stars_": 3,
             "reviews_copy": "<p>Lorem ipsum dolor sit amet consectetur adipisicing elit.<\/p>",
             "reviewer_name": "Melissa b."
@@ -104,7 +96,7 @@
           "type": "reviews",
           "settings": {
             "review_image": "shopify:\/\/shop_images\/young-man-in-bright-fashion_925x_b3b7ebd6-c91f-496a-a516-45403497ea25.jpg",
-            "reviews_date": "11.04.2023",
+            "reviews_date": "",
             "review_stars_": 4,
             "reviews_copy": "<p>Lorem ipsum dolor sit amet consectetur adipisicing elit.<\/p>",
             "reviewer_name": "Melissa b."
@@ -114,7 +106,7 @@
           "type": "reviews",
           "settings": {
             "review_image": "shopify:\/\/shop_images\/young-man-in-bright-fashion_925x_b3b7ebd6-c91f-496a-a516-45403497ea25.jpg",
-            "reviews_date": "11.05.2023",
+            "reviews_date": "",
             "review_stars_": 5,
             "reviews_copy": "<p>Lorem ipsum dolor sit amet consectetur adipisicing elit.<\/p>",
             "reviewer_name": "Melissa b."
@@ -124,7 +116,7 @@
           "type": "reviews",
           "settings": {
             "review_image": "shopify:\/\/shop_images\/young-man-in-bright-fashion_925x_b3b7ebd6-c91f-496a-a516-45403497ea25.jpg",
-            "reviews_date": "11.06.2023",
+            "reviews_date": "",
             "review_stars_": 5,
             "reviews_copy": "<p>Lorem ipsum dolor sit amet consectetur adipisicing elit.<\/p>",
             "reviewer_name": "Melissa b."
@@ -134,7 +126,7 @@
           "type": "reviews",
           "settings": {
             "review_image": "shopify:\/\/shop_images\/young-man-in-bright-fashion_925x_b3b7ebd6-c91f-496a-a516-45403497ea25.jpg",
-            "reviews_date": "11.07.2023",
+            "reviews_date": "",
             "review_stars_": 5,
             "reviews_copy": "<p>Lorem ipsum dolor sit amet consectetur adipisicing elit.<\/p>",
             "reviewer_name": "Melissa b."
@@ -144,7 +136,7 @@
           "type": "reviews",
           "settings": {
             "review_image": "shopify:\/\/shop_images\/young-man-in-bright-fashion_925x_b3b7ebd6-c91f-496a-a516-45403497ea25.jpg",
-            "reviews_date": "11.08.2023",
+            "reviews_date": "",
             "review_stars_": 5,
             "reviews_copy": "<p>Lorem ipsum dolor sit amet consectetur adipisicing elit.<\/p>",
             "reviewer_name": "Melissa b."
@@ -165,35 +157,35 @@
         "reviews_heading": "Real People - Real Reviews"
       }
     },
-    "discounted_product_EMBf4J": {
+    "discounted_product_fUXict": {
       "type": "discounted-product",
       "blocks": {
-        "text_3DVTbM": {
+        "text_7LPwte": {
           "type": "text",
           "settings": {
             "text": "{{ section.settings.product.vendor }}",
             "text_style": "uppercase"
           }
         },
-        "title_DefJVn": {
+        "title_JPaUDj": {
           "type": "title",
           "settings": {
             "heading_size": "h1"
           }
         },
-        "price_CFyE4c": {
+        "price_eCiF3y": {
           "type": "price",
           "settings": {
           }
         },
-        "variant_picker_CC9nnx": {
+        "variant_picker_w3aH9N": {
           "type": "variant_picker",
           "settings": {
             "picker_type": "button",
             "swatch_shape": "circle"
           }
         },
-        "buy_buttons_rc48mm": {
+        "buy_buttons_iHiWtB": {
           "type": "buy_buttons",
           "settings": {
             "show_dynamic_checkout": true,
@@ -202,15 +194,15 @@
         }
       },
       "block_order": [
-        "text_3DVTbM",
-        "title_DefJVn",
-        "price_CFyE4c",
-        "variant_picker_CC9nnx",
-        "buy_buttons_rc48mm"
+        "text_7LPwte",
+        "title_JPaUDj",
+        "price_eCiF3y",
+        "variant_picker_w3aH9N",
+        "buy_buttons_iHiWtB"
       ],
       "settings": {
-        "product": "black-leather-bag",
-        "discount_percentage": 50,
+        "product": "blue-silk-tuxedo",
+        "discount_percentage": 38,
         "media_size": "medium",
         "constrain_to_viewport": true,
         "media_fit": "contain",
@@ -220,9 +212,8 @@
     }
   },
   "order": [
-    "main",
     "discounted_product_NxyYCH",
     "reviews_section_gNWYXH",
-    "discounted_product_EMBf4J"
+    "discounted_product_fUXict"
   ]
 }

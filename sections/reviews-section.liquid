@@ -1,0 +1,191 @@
+{{ 'reviews-section.css' | asset_url | stylesheet_tag }}
+
+
+<section class="reviews-section">
+    <h3>{{ section.settings.reviews_heading }}</h3>	
+
+	<div class="reviews-slider-container">
+		<button class="prev">
+			<svg width="26" height="13" viewBox="0 0 26 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+				<path d="M0.999268 5.75L0.249268 5.75L0.249268 7.25L0.999268 7.25L0.999268 5.75ZM25.5296 7.03033C25.8225 6.73744 25.8225 6.26257 25.5296 5.96967L20.7566 1.1967C20.4637 0.903807 19.9889 0.903807 19.696 1.1967C19.4031 1.48959 19.4031 1.96447 19.696 2.25736L23.9386 6.5L19.696 10.7426C19.4031 11.0355 19.4031 11.5104 19.696 11.8033C19.9889 12.0962 20.4637 12.0962 20.7566 11.8033L25.5296 7.03033ZM0.999268 7.25L24.9993 7.25L24.9993 5.75L0.999268 5.75L0.999268 7.25Z" fill="#fff"/>
+			</svg>
+		</button>
+		<button class="next">
+			<svg width="26" height="13" viewBox="0 0 26 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+				<path d="M0.999268 5.75L0.249268 5.75L0.249268 7.25L0.999268 7.25L0.999268 5.75ZM25.5296 7.03033C25.8225 6.73744 25.8225 6.26257 25.5296 5.96967L20.7566 1.1967C20.4637 0.903807 19.9889 0.903807 19.696 1.1967C19.4031 1.48959 19.4031 1.96447 19.696 2.25736L23.9386 6.5L19.696 10.7426C19.4031 11.0355 19.4031 11.5104 19.696 11.8033C19.9889 12.0962 20.4637 12.0962 20.7566 11.8033L25.5296 7.03033ZM0.999268 7.25L24.9993 7.25L24.9993 5.75L0.999268 5.75L0.999268 7.25Z" fill="#fff"/>
+			</svg>
+		</button>
+		<div class="reviews-inner-container">
+			<div class="slider">
+				{%- for block in section.blocks -%}
+					{%- case block.type -%}
+						{%- when 'reviews' -%}
+							<div class="review-card">
+								<div class="review-card-inner">	
+									<div class="review-img">
+										<span>{{ block.settings.reviews_date }}</span>
+										{%- assign review_image = block.settings.review_image -%}
+										{% if review_image %}
+											{{ review_image | image_url: width: review_image.width | image_tag: class: 'add_your_class_here', loading: 'lazy' }}
+										{% else %}
+											<p>No image available</p>
+										{% endif %}
+									</div>
+									<div class="star-outer">
+										<div class="review-stars stars-{{ block.settings.review_stars_ }}">
+											{% for i in (1..5) %}
+												<span class="icon-star icon-star-{% if i <= block.settings.review_stars_ %} active{% endif %}">
+													<div class="star-empty"><svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"  fill-rule="evenodd" clip-rule="evenodd"><path d="M15.668 8.626l8.332 1.159-6.065 5.874 1.48 8.341-7.416-3.997-7.416 3.997 1.481-8.341-6.064-5.874 8.331-1.159 3.668-7.626 3.669 7.626zm-6.67.925l-6.818.948 4.963 4.807-1.212 6.825 6.068-3.271 6.069 3.271-1.212-6.826 4.964-4.806-6.819-.948-3.002-6.241-3.001 6.241z"/></svg></div>
+													<div class="star-fill"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M12 .587l3.668 7.568 8.332 1.151-6.064 5.828 1.48 8.279-7.416-3.967-7.417 3.967 1.481-8.279-6.064-5.828 8.332-1.151z"/></svg></div>
+												</span>
+											{% endfor %}
+										</div>
+										<span class="total-reviews">{{ block.settings.review_stars_ }}.0</span>
+									</div>
+									{{ block.settings.reviews_copy }}
+									<h4>{{ block.settings.reviewer_name }}</h4>
+								</div>
+							</div>
+						{%- endcase -%}
+					{%- endfor -%}
+			</div>
+		</div>
+	</div>
+</section>
+
+<script>
+// Review Slider script	
+document.addEventListener('DOMContentLoaded', () => {
+    const sliderContainers = document.querySelectorAll('.reviews-slider-container');
+
+    sliderContainers.forEach(sliderContainer => {
+        const slider = sliderContainer.querySelector('.slider');
+        if (!slider) return; // Add a check for slider existence
+
+        const slides = slider.querySelectorAll('.review-card');
+        const prevButton = sliderContainer.querySelector('.prev');
+        const nextButton = sliderContainer.querySelector('.next');
+        let currentIndex = 0;
+        let autoplayInterval; // Variable to hold the autoplay interval
+
+        if (!slides || slides.length === 0) return; // Add a check for slides existence
+
+        const updateSliderPosition = () => {
+            const isMobile = window.innerWidth <= 768;
+            const slidesToShow = isMobile ? 1.4 : 5.3; // Show 1 slide on small screens, 4 on large screens
+            const slideWidth = sliderContainer.offsetWidth / slidesToShow; // Slide width based on container width and number of slides to show
+            const newPosition = -currentIndex * slideWidth;
+            slider.style.transform = `translateX(${newPosition}px)`;
+
+            slides.forEach(slide => {
+                slide.style.width = `${slideWidth}px`; // Adjust for margin
+                slide.style.flexBasis = `${slideWidth}px`;
+            });
+
+            // Hide/show buttons based on the current index
+            prevButton.style.display = currentIndex === 0 ? 'none' : 'block';
+            nextButton.style.display = currentIndex >= slides.length - slidesToShow ? 'none' : 'block';
+        };
+
+        const showPrevSlide = () => {
+            if (currentIndex > 0) {
+                currentIndex--;
+                updateSliderPosition();
+            }
+        };
+
+        const showNextSlide = () => {
+            if (currentIndex < slides.length - (window.innerWidth <= 768 ? 1 : 4)) {
+                currentIndex++;
+                updateSliderPosition();
+            } else {
+                // If it's the last slide, scroll back to the first slide
+                currentIndex = 0;
+                updateSliderPosition();
+            }
+        };
+
+        prevButton.addEventListener('click', showPrevSlide);
+        nextButton.addEventListener('click', showNextSlide);
+
+        window.addEventListener('resize', () => {
+            updateSliderPosition();
+        });
+
+        const startAutoplay = () => {
+            autoplayInterval = setInterval(() => {
+                showNextSlide();
+            }, 3000); // Adjust autoplay interval as needed (currently set to 3 seconds)
+        };
+
+		const stopAutoplay = () => {
+			clearInterval(autoplayInterval);
+		};
+
+        sliderContainer.addEventListener('mouseleave', startAutoplay); // Resume autoplay on mouse leave
+
+		sliderContainer.addEventListener('mouseenter', stopAutoplay); // Pause autoplay on mouse enter
+
+        startAutoplay(); // Start autoplay on initial load
+        updateSliderPosition(); // Ensure the first slide is shown on initial load
+    });
+});
+
+</script>
+
+{% schema %}
+  {
+  "name": "Reviews Section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "reviews_heading",
+      "label": "Reviews Heading",
+      "default": "Real People - Real Reviews"
+    }
+  ],
+  "blocks": [
+    {
+      "name": "Reviews",
+      "type": "reviews",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "review_image",
+          "label": "Review Image"
+        },
+		{
+			"type": "text",
+			"id": "reviews_date",
+			"label": "Reviews Date"
+		},
+        {
+          "type": "range",
+          "id": "review_stars_",
+          "label": "Review Stars ",
+          "min": 1,
+          "max": 5,
+          "step": 1,
+          "default": 5
+        },
+        {
+          "type": "richtext",
+          "id": "reviews_copy",
+          "label": "Reviews Copy"
+        },
+        {
+          "type": "text",
+          "id": "reviewer_name",
+          "label": "Reviewer Name",
+          "default": "Reviewer Name"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Reviews Section"
+    }
+  ]
+}  
+{% endschema %}

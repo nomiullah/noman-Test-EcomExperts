@@ -47,13 +47,16 @@
             picker_type: picker_type
           %}
         </fieldset>
+        
       {%- elsif picker_type == 'button' -%}
         <fieldset class="js product-form__input product-form__input--pill"
           {% if option.name == 'Size' %}
-            id="fieldset-for-size"
+            id="fieldset-for-size-{{ section.id }}"
+            data-field-type="fieldset-for-size"
           {% endif %}
           {% if option.name == 'Color' %}
-            id="fieldset-for-color"
+            id="fieldset-for-color-{{ section.id }}"
+            data-field-type="fieldset-for-color"
           {% endif %}
         >
             
